@@ -1,20 +1,15 @@
+import os
+import sys
 
-from db import PostgresDB, SqliteDB
-
-# db = PostgresDB()
-
-# cur = db.get_cursor(dict_cursor=True)
-# cur.execute("SELECT now() AS server_time;")
-# print(cur.fetchone())
-
-# cur.close()
-# db.close()
+from db import SqliteDB
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 sqlit_db = SqliteDB()
 
 cur = sqlit_db.get_cursor(row_factory=True)
-cur.execute("SELECT datetime('now') AS server_time;")
+#cur.execute("SELECT datetime('now') AS server_time;")
+cur.execute("select * from sec_war_findings;")
 print(dict(cur.fetchone()))
 
 cur.close()
